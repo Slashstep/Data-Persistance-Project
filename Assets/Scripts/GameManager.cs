@@ -78,11 +78,11 @@ public class GameManager : MonoBehaviour
 
     public void CheckHighscore(int score1)
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < highScore.Length; i++)
         {
             if (score1 > highScore[i])
             {
-                for (int j = 4; j > i; j--)
+                for (int j = highScore.Length - 1; j >= i + 1; j--)
                 {
                     highScore[j] = highScore[j - 1];
                     highScoreName[j] = highScoreName[j - 1];
@@ -90,6 +90,8 @@ public class GameManager : MonoBehaviour
 
                 highScore[i] = score1;
                 highScoreName[i] = newName;
+
+                return;
             }
         }
     }

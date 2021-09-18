@@ -1257,9 +1257,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newScore: 0
   oldScore: 0
-  highScore: 0
+  highScore: 0a00000008000000060000000500000004000000
   newName: 
-  highScoreName: 
+  highScoreName:
+  - Nils
+  - Nils
+  - Nils
+  - Nils
+  - Nils
   volume: 0.5
   paddleSpeed: 2
 --- !u!82 &1115016142

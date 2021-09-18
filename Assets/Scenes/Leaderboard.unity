@@ -1203,4 +1203,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e1d4b29a67c84a4a8d394b06bfb9f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highScoreText: []
+  highScoreText:
+  - {fileID: 184754407}
+  - {fileID: 2016445113}
+  - {fileID: 1340939867}
+  - {fileID: 1607128258}
+  - {fileID: 1807103269}
