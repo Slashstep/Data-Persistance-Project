@@ -53,6 +53,6 @@ public class MainMenuUI : MonoBehaviour
 
     public void ShowHighscore()
     {
-        highScoreText.text = "Highscore: " + GameManager.Instance.highScoreName + ", " + GameManager.Instance.highScore;
+        highScoreText.text = "Highscore: " + GameManager.Instance.highScoreName[0] + ", " + GameManager.Instance.highScore[0];
     }
 }

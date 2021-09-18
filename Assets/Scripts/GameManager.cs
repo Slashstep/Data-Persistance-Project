@@ -9,10 +9,15 @@ public class GameManager : MonoBehaviour
 
     public int newScore;
     public int oldScore;
-    public int highScore;
+    public int[] highScore;
 
     public string newName;
-    public string highScoreName;
+    public string[] highScoreName;
+
+    public float volume;
+    public float paddleSpeed;
+
+    private AudioSource music;
 
     private void Awake()
     {
@@ -28,21 +33,30 @@ public class GameManager : MonoBehaviour
         LoadStuff();
     }
 
+    private void Start()
+    {
+        music = GetComponent<AudioSource>();
+        music.volume = volume;
+    }
+
     [System.Serializable]
     class SaveData
     {
-        public string playerNameSaved;
-        public int highscoreSaved;
+        public string[] playerNameSaved;
+        public int[] highscoreSaved;
+        public float volumeSaved;
+        public float paddleSpeedSaved;
     }
 
     public void SaveStuff()
     {
-        Debug.Log(newScore + ", " + highScore);
-        CheckHighscore(newScore, highScore);
+        CheckHighscore(newScore);
 
         SaveData data = new SaveData();
         data.playerNameSaved = highScoreName;
         data.highscoreSaved = highScore;
+        data.volumeSaved = volume;
+        data.paddleSpeedSaved = paddleSpeed;
 
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
@@ -57,19 +71,37 @@ public class GameManager : MonoBehaviour
             SaveData data = JsonUtility.FromJson<SaveData>(json);
             highScoreName = data.playerNameSaved;
             highScore = data.highscoreSaved;
+            volume = data.volumeSaved;
+            paddleSpeed = data.paddleSpeedSaved;
         }
     }
 
-    public void CheckHighscore(int score1, int score2)
+    public void CheckHighscore(int score1)
     {
-        if (score1 <= score2)
+        for (int i = 0; i < 4; i++)
         {
-            highScore = score2;
+            if (score1 > highScore[i])
+            {
+                for (int j = 4; j > i; j--)
+                {
+                    highScore[j] = highScore[j - 1];
+                    highScoreName[j] = highScoreName[j - 1];
+                }
+
+                highScore[i] = score1;
+                highScoreName[i] = newName;
+            }
         }
-        else
-        {
-            highScore = score1;
-            highScoreName = newName;
-        }
+    }
+
+    public void ChangeMusicVolume(float vol)
+    {
+        music.volume = vol;
+        volume = vol;
+    }
+
+    public void ChangePaddleSpeed(float speed)
+    {
+        paddleSpeed = speed;
     }
 }

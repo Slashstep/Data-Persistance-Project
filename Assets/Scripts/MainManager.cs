@@ -24,7 +24,7 @@ public class MainManager : MonoBehaviour
     void Start()
     {
         ScoreText.text = GameManager.Instance.newName + " - Score: ";
-        HighScoreText.text = "Current Highscore: " + GameManager.Instance.highScoreName + ", " + GameManager.Instance.highScore;
+        HighScoreText.text = "Current Highscore: " + GameManager.Instance.highScoreName[0] + ", " + GameManager.Instance.highScore[0];
 
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
